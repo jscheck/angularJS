@@ -1,4 +1,4 @@
-angular.module('demoApp')
+angular.module('demoApp', ['ngStorage'])
 
     .controller('textController', ['$scope','$http', function textController($scope,$http) {
         $scope.showText = function() {
@@ -18,4 +18,15 @@ angular.module('demoApp')
         $scope.showPop = function() {
             alert('POP');
         };
+    }])
+
+    .controller('storageController', ['$scope', '$localStorage', function storageController($scope, $localStorage) {
+        $scope.writeText = function() {
+            $localStorage.text = $scope.storage.text;
+            $scope.storage.text = '';
+        };
+        $scope.readText = function() {
+            alert($localStorage.text);
+        };
     }]);
+

@@ -1,37 +1,11 @@
-angular.module('demoApp', [])
+angular.module('demoApp')
 
-    .service('testService', function(){
-
-        this.text = 'Service says Hello';
-
-        this.sayHello= function(){
-            return this.text;
+    .controller('testController', ['$scope', 'testService', 'testFactory', function testController($scope, testService, testfactory) {
+        $scope.callService = function() {
+            $scope.text = testService.sayHello();
         };
-    })
-
-    .factory('testFactory', function(){
-        // private functions and variables
-        this.text = 'Factory says Hello';
-
-        this.makeText = function(){
-            return this.text
-        };
-
-        return {
-            sayHello: function(text){
-                return this.makeText;
-            }
-        }
-    })
-
-    .controller('testController', ['$scope', 'testService', 'testFactory', function storageController($scope, testService, testfactory) {
-        $scope.writeText = function() {
-            $localStorage.text = $scope.storage.text;
-            $scope.storage.text = '';
-        };
-        $scope.readText = function() {
-            alert($localStorage.text);
+        $scope.callFactory = function() {
+            $scope.text = testfactory.sayHello();
         };
     }]);
-
 
